@@ -1,0 +1,51 @@
+body {
+  background-color: #333;
+  margin: 0;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+  border: #000 3px solid;
+  background-color: #ccc;
+  width: auto;
+  min-width: 500px;
+  border-collapse: collapse;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+th {
+  font-size: 24px;
+  padding: 4px;
+}
+
+th,
+td {
+  border: black 1px solid;
+}
+
+td {
+  padding: 2px;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+}
+
+.nombre-td {
+  padding-left: 10px;
+}
+
+.informacion {
+  text-align: center;
+}
+
+.red {
+  color: rgb(156, 5, 5);
+}
+
+.green {
+  color: #009200;
+}
