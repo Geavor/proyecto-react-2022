@@ -1,0 +1,50 @@
+.titulo-cripto {
+  font-size: 30px;
+}
+
+.cripto-info {
+  width: max-content;
+  min-width: 300px;
+  padding: 15px;
+  padding-bottom: 20px;
+  margin: 20px auto;
+  background-color: rgba(247, 252, 182, 0.325);
+  outline: 4px skyblue solid;
+  border-radius: 25px;
+  font-size: 20px;
+}
+
+.text-cripto {
+  color: black;
+  font-weight: bold;
+}
+
+.history-price h2 {
+  margin-top: 40px;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.history-price-table{
+  min-width: 300px;
+  margin: 0 auto;
+}
+
+.history-price-table thead{
+  font-size: 20px;
+}
+
+.history-price-table,
+.history-price-table tr,
+.history-price-table td {
+  border: 1px wheat solid;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.back-cripto{
+  display: block;
+  text-align: center;
+}
+
+
