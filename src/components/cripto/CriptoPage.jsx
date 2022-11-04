@@ -1,86 +1,90 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { parseFloatNumber } from "../../helpers/numbers"
 import "./CriptoPage.css";
 
 const CriptoPage = () => {
   const API_URL = import.meta.env.VITE_API_URL;
   const params = useParams();
-  const [state, setState] = useState();
 
-  const getMil = (date) => {
-    if (Boolean(date)) {
-      return new Date(date).getTime();
-    }
-    return Date.now();
-  };
-
-  const req1 = axios.get(`${API_URL}assets/${params.id}`);
-  const req2 = axios.get(
-    `${API_URL}assets/${params.id}/history?interval=d1&start=${getMil(
-      "2022-10-01"
-    )}&end=${getMil()}`
-  );
+  const [cripto, setCripto] = useState({});
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {
     axios
-      .all([req1, req2])
-      .then(
-        axios.spread((...responses) => {
-          const resp1 = responses[0].data.data;
-          const resp2 = responses[1].data.data;
-          setState({ ...resp1, historical: resp2 });
-        })
-      )
-      .catch((errors) => {
-        console.error("La petición multiple falló", errors);
-      });
+      .get(`${API_URL}assets/${params.id}`)
+      .then((data) => {
+        setCripto(data.data.data);
+      })
+      .catch((e) => console.error(e));
+
+    axios
+      .get(`${API_URL}assets/${params.id}/history?interval=d1&start=1659700000000&end=1662490888952`)
+      .then((data) => {
+        setHistory(data.data.data);
+      })
+      .catch((e) => console.error(e));
   }, []);
 
-  if (!state) return <span>Cargando...</span>;
+  if (!history) return <span>Cargando...</span>;
 
   return (
-    <>
-      <div className="cripto-info">
-        <h2 className="titulo-cripto">Criptomoneda: {state.name}</h2>
-        <p>
-          <span className="text-cripto">Simbolo: </span>
-          {state.symbol}
-        </p>
-        <p>
-          <span className="text-cripto">Rank: </span>
-          {state.rank}
-        </p>
-        <p>
-          <span className="text-cripto">Precio: </span>
-          {parseFloat(state.priceUsd).toFixed(3)}
-        </p>
-        <p>
-          <span className="text-cripto">Página: </span>
-          <a href={state.explorer}>Enlace</a>
-        </p>
+    <div className="cripto-page-container">
+    <div className="info">
+      <div className="main-info">
+        <span>Ranking: {cripto.rank}</span>
+        <h1>{cripto.name}</h1>
+        <span className="symbol">{cripto.symbol}</span>
       </div>
-      <div className="history-price">
-        <h2>Historial de Cambios</h2>
-        <table className="history-price-table">
-          <thead>
-            <tr>
-              <td>Precio</td>
-              <td>Fecha</td>
+      <div className="details">
+        <ul>
+          <li className="detail">
+            <span className="label">Precio: </span>
+            <span>{parseFloatNumber(cripto.priceUsd, 3)}</span>
+          </li>
+          <li className="detail">
+            <span className="label">MaxSupply: </span>
+            <span>{parseFloatNumber(cripto.maxSupply, 3)}</span>
+          </li>
+          <li className="detail">
+            <span className="label">Market Cap (USD): </span>
+            <span>{parseFloatNumber(cripto.marketCapUsd, 3)}</span>
+          </li>
+          <li className="detail">
+            <span className="label">Volumen (USD - 24 Hrs.): </span>
+            <span>{parseFloatNumber(cripto.volumeUsd24Hr, 3)}</span>
+          </li>
+          <li className="detail">
+            <span className="label">Variación (24 Hrs.): </span>
+            <span>{parseFloatNumber(cripto.changePercent24Hr, 3)}</span>
+          </li>
+          <li className="detail">
+            <span className="label">Vwap 24 Hrs.: </span>
+            <span>{parseFloatNumber(cripto.vwap24Hr, 3)}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div className="history">
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Precio</th>
+          </tr>
+        </thead>
+        <tbody>
+          {history.reverse().map(({date, priceUsd, time}) => (
+            <tr key={time}>
+              <td className="label">{new Date(date).toDateString()}</td>
+              <td className="price">{parseFloatNumber(priceUsd, 3)}</td>
             </tr>
-          </thead>
-          <tbody>
-            {state.historical.map(({ date, priceUsd, time }) => (
-              <tr key={time}>
-                <td>{parseFloat(priceUsd).toFixed(2)}</td>
-                <td>{String(date).slice(0,10)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <Link className="back-cripto" to="/criptomonedas">Regresar</Link>
-    </>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
   );
 };
 

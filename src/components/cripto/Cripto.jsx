@@ -4,7 +4,9 @@ import "./Cripto.css";
 const Cripto = ({ id, name, priceUsd, symbol, changePercent24Hr }) => {
   return (
     <div className="cripto">
-      <h2>{name}</h2>
+      <Link to={`/criptomonedas/${id}`}>
+        <h2>{name}</h2>
+      </Link>
       <div className="info">
         <p>
           <span className="label">Precio: </span>
@@ -24,7 +26,6 @@ const Cripto = ({ id, name, priceUsd, symbol, changePercent24Hr }) => {
             {parseFloat(changePercent24Hr).toFixed(3)}%
           </span>
         </p>
-        <Link to={`/criptomonedas/${id}`}>Ver detalles</Link>
       </div>
     </div>
   );

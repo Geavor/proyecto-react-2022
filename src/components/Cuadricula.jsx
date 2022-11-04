@@ -34,7 +34,7 @@ function Cuadricula() {
   if (!criptos) return <span>Cargando...</span>;
 
   return (
-    <div className="app-container">
+    <div className="grid-container">
       <h1>Lista de Criptomonedas</h1>
       <div className="cripto-container">
         {criptos.map(({ id, name, priceUsd, symbol, changePercent24Hr }) => (

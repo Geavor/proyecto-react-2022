@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Pagina404 from "./components/404";
 import Cuadricula from "./components/Cuadricula";
 import App from "./components/App";
-import Home from "./components/Home";
+import Home from "./Home";
 import CriptoPage from "./components/cripto/CriptoPage";
 import "./main.css";
 
