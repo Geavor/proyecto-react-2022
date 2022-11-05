@@ -5,7 +5,7 @@ import usePetition from "../hooks/usePetition";
 function Cuadricula() {
   const [criptos, cargandoCriptos, errorCriptos] = usePetition("assets");
 
-  console.log("Cuadricula",criptos, cargandoCriptos, errorCriptos);
+  console.log("Cuadricula", criptos, cargandoCriptos, errorCriptos);
 
   if (cargandoCriptos) return <span>Cargando...</span>;
   if (Boolean(errorCriptos))
@@ -15,7 +15,7 @@ function Cuadricula() {
     <div className="grid-container">
       <h1>Lista de Criptomonedas</h1>
       <div className="cripto-container">
-        {
+        {criptos &&
           criptos.map(({ id, name, priceUsd, symbol, changePercent24Hr }) => (
             <Cripto
               key={id}
