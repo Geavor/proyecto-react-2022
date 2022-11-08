@@ -1,0 +1,46 @@
+.login-container {
+  font-size: 20px;
+  background: rgba(0 0 0 / 0.25);
+  width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 5%;
+}
+
+.login-container form div:not(:last-child) {
+  margin-bottom: 25px;
+}
+
+.login-container h1 {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.login-container .field label,
+input {
+  display: block;
+  width: 100%;
+}
+
+.login-container input{
+  font-size: 25px;
+}
+
+.login-container .submit {
+  margin-top: 25px;
+}
+
+.login-container .submit input{
+  margin-top: 25px;
+  padding: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.login-container .submit input:hover{
+  transition: linear .3s;
+  color: white;
+  background: black;
+}

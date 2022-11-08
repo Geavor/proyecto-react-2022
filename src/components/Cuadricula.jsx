@@ -5,8 +5,6 @@ import usePetition from "../hooks/usePetition";
 function Cuadricula() {
   const [criptos, cargandoCriptos, errorCriptos] = usePetition("assets");
 
-  console.log("Cuadricula", criptos, cargandoCriptos, errorCriptos);
-
   if (cargandoCriptos) return <span>Cargando...</span>;
   if (Boolean(errorCriptos))
     return <span>Ha ocurrido un error: {errorCriptos.message}</span>;
