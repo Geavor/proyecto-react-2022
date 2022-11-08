@@ -5,21 +5,32 @@ import "./Login.css";
 
 const Login = () => {
   const navigation = useNavigate();
+  const API2_URL = import.meta.env.VITE_API2_URL;
 
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
 
+  const [cargando, setCargando] = useState(false);
+  const [error, setError] = useState();
+
   const submit = (e) => {
     e.preventDefault();
+    setCargando(true);
+    setError(null);
     axios
-      .post(`https://reqres.in/api/login`, user)
+      .post(`${API2_URL}login`, user)
       .then((data) => {
+        setCargando(false);
         localStorage.setItem("tokenEDmarket", data.data.token);
         navigation("/");
       })
-      .catch((e) => console.error(e));
+      .catch((e) => {
+        setCargando(false);
+        console.table(e);
+        setError(e.response.data.error);
+      });
   };
 
   if (localStorage.getItem("tokenEDmarket")) return <Navigate to="/" />;
@@ -57,9 +68,14 @@ const Login = () => {
           />
         </div>
         <div className="submit">
-          <input type="submit" value="Ingresar" />
+          <input
+            type="submit"
+            value={cargando ? "Cargando..." : "Ingresar"}
+            className="link"
+          />
         </div>
       </form>
+      {error && <span className="error">Error: {error}</span>}
     </div>
   );
 };

@@ -4,8 +4,8 @@ import { UserContext } from "../../context/UserContext";
 import "./Menu.css";
 
 const Menu = () => {
-  const navigation = useNavigate();
 
+  const navigation = useNavigate();
   const usuario = useContext(UserContext);
 
   return (
@@ -18,7 +18,7 @@ const Menu = () => {
           <NavLink to="/criptomonedas">Lista de criptos</NavLink>
         </li>
         <li>
-          <NavLink to="/perfil">Perfil de {usuario.name}</NavLink>
+          <NavLink to="/perfil">Perfil de {usuario.first_name} {usuario.last_name}</NavLink>
         </li>
         <li>
           <a
