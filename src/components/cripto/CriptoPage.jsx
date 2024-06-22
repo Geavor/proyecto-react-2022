@@ -6,10 +6,13 @@ import CriptoInfo from "./info/CriptoInfo";
 
 const CriptoPage = () => {
   const params = useParams();
+  const currentDate = Date.now();
+  const ONE_MONTH = 2750000000 //32 days
+  const startDate = currentDate - ONE_MONTH;
 
   const [cripto,cargandoCripto,errorCripto] = usePetition(`assets/${params.id}`);
   const [history,cargandoHistory,errorHistory] = usePetition(
-    `assets/${params.id}/history?interval=d1&start=1659700000000&end=1662490888952`
+    `assets/${params.id}/history?interval=d1&start=${startDate}&end=${currentDate}`
   );
 
   if (cargandoCripto || cargandoHistory) return <span>Cargando...</span>;

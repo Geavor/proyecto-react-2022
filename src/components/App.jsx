@@ -3,7 +3,8 @@ import Menu from "./menu/Menu";
 import "./App.css";
 
 const App = () => {
-  if (!localStorage.getItem("tokenEDmarket")) return <Navigate to="/login" />;
+  // Commented under line to access other pages
+  // if (!localStorage.getItem("tokenEDmarket")) return <Navigate to="/login" />;
 
   return (
     <div className="app-container">
